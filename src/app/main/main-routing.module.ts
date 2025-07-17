@@ -5,31 +5,39 @@ import { ProductsComponent } from './products/products.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
 import { OrdersComponent } from './orders/orders.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
-    path: '', component: MainComponent
+    path: '', component: MainComponent,
+
+    children: [
+        {
+          path: '', component: DashboardComponent
+        },
+        {
+          path:'product', component : ProductsComponent
+        },
+
+        {
+          path:'order', component : OrdersComponent
+        },
+
+        {
+          path:'user', component : UsersComponent
+        },
+
+        {
+          path:'userprofile', component : ProfileComponent
+        },
+
+        {
+          path:'dashboard', component : DashboardComponent
+        },
+    ]
   },
 
-  {
-    path:'product', component : ProductsComponent
-  },
 
-  {
-    path:'order', component : OrdersComponent
-  },
-
-  {
-    path:'user', component : UsersComponent
-  },
-
-  {
-    path:'userprofile', component : ProfileComponent
-  },
-
-  {
-    path:'main', component : MainComponent
-  },
   
 ];
 
