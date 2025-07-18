@@ -45,31 +45,42 @@
 
 
                         <!-- Additional Content -->
-                        
-                            <!-- <h3 style="font-size:1.5em; text-align: center;margin-top:0.5rem">Graduation Students</h3> -->
 
-                            <div class="row card-body space-remover px-0">
-                                <div class="col-lg-4 form-group">
-                                    <label for="productName">Product Name</label>
-                                    <input class="form-control" #productName name="productName" id="productName"
-                                        type="text" ngModel>
-                                </div>
+                        <!-- <h3 style="font-size:1.5em; text-align: center;margin-top:0.5rem">Graduation Students</h3> -->
 
-                                <div class="col-lg-4 form-group">
-                                    <label for="productDescription">Product Description</label>
-                                    <input class="form-control" #productDescription name="productDescription" id="productDescription"
-                                        type="text" ngModel>
-                                </div>
-
-                                <div class="col-lg-4 form-group">
-                                    <label for="productPrice">Product Price</label>
-                                    <input class="form-control" #productPrice name="productPrice" id="productPrice"
-                                        type="number" ngModel>
-                                </div>
+                        <div class="row card-body space-remover px-0">
+                            <div class="col-lg-4 form-group">
+                                <label for="productName">Product Name</label>
+                                <input class="form-control" #productName name="productName" id="productName" type="text"
+                                    ngModel>
                             </div>
-                        
+
+                            <div class="col-lg-4 form-group">
+                                <label for="productDescription">Product Description</label>
+                                <input class="form-control" #productDescription name="productDescription"
+                                    id="productDescription" type="text" ngModel>
+                            </div>
+
+                            <div class="col-lg-4 form-group">
+                                <label for="productPrice">Product Price</label>
+                                <input class="form-control" #productPrice name="productPrice" id="productPrice"
+                                    type="number" ngModel>
+                            </div>
+
+                            <!-- <div class="col-12 text-end mt-4">
+                                <button type="button" class="btn btn-primary" (click)="addProduct()">
+                                    <i class="bi bi-bag-plus-fill"></i> Add Product
+                                </button>
+                            </div> -->
+                        </div>
+
                     </div>
                     <div class="modal-footer">
+                        
+                                <button type="button" class="btn btn-primary" (click)="addProduct()">
+                                    <i class="bi bi-bag-plus-fill"></i> Add Product
+                                </button>
+                            
                         <button type="button" class="btn btn-secondary" (click)="hideModal()">Close</button>
                     </div>
                 </div>

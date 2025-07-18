@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProductService } from '../Services/product.service';
+import { ToastrService } from 'ngx-toastr';
 import { product } from '../Models/product.model';
 
 @Component({
@@ -37,11 +38,17 @@ export class ProductsComponent implements OnInit {
 ];
 
   @ViewChild("f") formRef!: NgForm;
-  constructor(private productService: ProductService){}
+  constructor(private productService: ProductService,
+    private toastr: ToastrService
+  ){}
   
 
   ngOnInit(): void {
-    this.products = [];
+    this.GetAllProducts();
+  }
+
+  GetAllProducts(){
+        this.products = [];
     this.productService.GetAllProducts().subscribe((res: any) => {
       console.log(res);
       this.products = res;
@@ -59,6 +66,23 @@ export class ProductsComponent implements OnInit {
 
 
   addProduct() {
+    const {productName, productDescription, productPrice} = this.formRef.value;
+
+    if (!productName || !productDescription || !productPrice) {
+      this.toastr.warning("All fields are required...");
+      return;
+    }
+
+    this.productService.AddProduct({id: 0,name: productName, description: productDescription,price: productPrice}).subscribe((res : any) => {
+      console.log(res);
+      if (res.name == productName) {
+        this.hideModal();
+        this.GetAllProducts();
+        this.toastr.success("Product " + res.name +" Added Successfully.");
+      }else{
+        this.toastr.error("Some Error Occured.");
+      }
+    });
     // Add product to backend or local array
     // this.products.push({ ...this.newProduct });
     // this.closeAddProductDialog();
