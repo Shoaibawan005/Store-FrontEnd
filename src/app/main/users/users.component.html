@@ -1,1 +1,75 @@
-<p>users works!</p>
+<div class="container mt-4 shadow p-3 mb-5 bg-white rounded">
+  <div class="row mb-2 align-items-center">
+    <div class="col-6">
+      <h2 class="text-primary mb-5 p-3" style="font-size: 40px;">Users</h2>
+    </div>
+    <div class="col-6 text-end">
+      <button type="button" class="btn btn-primary" (click)="showModal()">
+        <i class="bi bi-person-plus-fill"></i> Add User
+      </button>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let user of users; let i = index">
+      <div class="card h-100 shadow-sm">
+        <img [src]="defaultUserPic" class="card-img-top" alt="User Image">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title mb-0">{{ user.Name }}</h5>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteUser(user.Id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+          <p class="card-text text-muted">Phone: {{ user.Phone_Num }}</p>
+          <p class="card-text">Age: {{ user.Age }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add User Dialog -->
+<form #f="ngForm">
+  <div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{ 'show': isModelOpen }"
+    [ngStyle]="{ 'display': isModelOpen ? 'block' : 'none' }">
+    <div class="modal-dialog modal-dialog-centered custom-modal" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add User</h5>
+        </div>
+        <div class="modal-body">
+          <div class="row card-body space-remover px-0">
+            <div class="col-lg-6 form-group">
+              <label for="userName">Name</label>
+              <input class="form-control" #userName name="userName" id="userName" type="text" ngModel>
+            </div>
+
+            <div class="col-lg-6 form-group">
+              <label for="userPhone">Phone Number</label>
+              <input class="form-control" #userPhone name="userPhone" id="userPhone" type="text" ngModel>
+            </div>
+
+            <div class="col-lg-6 form-group mt-3">
+              <label for="userAge">Age</label>
+              <input class="form-control" #userAge name="userAge" id="userAge" type="number" ngModel>
+            </div>
+
+            <div class="col-lg-6 form-group mt-3">
+              <label for="profilePic">Profile Picture URL (Optional)</label>
+              <input class="form-control" #profilePic name="profilePic" id="profilePic" type="text" ngModel>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="addUser()">
+            <i class="bi bi-person-plus-fill"></i> Add User
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="hideModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
