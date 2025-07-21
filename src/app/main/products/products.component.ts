@@ -62,6 +62,7 @@ export class ProductsComponent implements OnInit {
 
   hideModal(): void {
     this.isModelOpen = false;
+    this.formRef.reset(); 
   }
 
 
@@ -73,12 +74,12 @@ export class ProductsComponent implements OnInit {
       return;
     }
 
-    this.productService.AddProduct({id: 0,name: productName, description: productDescription,price: productPrice}).subscribe((res : any) => {
+    this.productService.AddProduct({Id: 0,Name: productName, Description: productDescription,Price: productPrice}).subscribe((res : any) => {
       console.log(res);
-      if (res.name == productName) {
+      if (res.Name == productName) {
         this.hideModal();
         this.GetAllProducts();
-        this.toastr.success("Product " + res.name +" Added Successfully.");
+        this.toastr.success("Product " + res.Name +" Added Successfully.");
       }else{
         this.toastr.error("Some Error Occured.");
       }
@@ -88,4 +89,28 @@ export class ProductsComponent implements OnInit {
     // this.closeAddProductDialog();
   }
 
+  // deleteProduct(product_id: number){
+
+  //   this.productService.deleteProduct(product_id).subscribe((res: { message: string }) => {
+  //     console.log(res);
+  //   });
+
+  //   this.GetAllProducts();
+  // }
+
+
+  deleteProduct(product_id: number){
+
+    this.productService.deleteProduct(product_id).subscribe({
+      next:(res: {message : string}) => {
+        this.toastr.success(res.message);
+        this.GetAllProducts();
+      },
+
+      error: (err) => {
+        console.error("Error", err);
+        this.toastr.error("Failed to delete the p0roduct.")
+      }
+    })
+  }
 }
