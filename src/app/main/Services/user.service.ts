@@ -21,4 +21,14 @@ export class UserService {
 
     return this.http.get<User[]>(this.apiURL)
   }
+
+  AddUser(user: User): Observable<User> {
+    
+    return this.http.post<User>(this.apiURL, user);
+  }
+
+  DeleteUser(user_id: number): Observable<{message: string}> {
+    console.log(user_id)
+    return this.http.delete<{message: string}>(`${this.apiURL}/${user_id}`);
+  }
 }
